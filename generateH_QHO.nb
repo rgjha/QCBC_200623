@@ -1,0 +1,176 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5568,        168]
+NotebookOptionsPosition[      4999,        150]
+NotebookOutlinePosition[      5394,        166]
+CellTagsIndexPosition[      5351,        163]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"nbits", "=", "3"}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{"number", " ", "of", " ", "qubits"}], "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{"n", "=", 
+   SuperscriptBox["2", "nbits"]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"g", "=", "0.02"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"A1", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"j", "-", "i"}], ")"}], "==", "1"}], ",", 
+        RowBox[{"Sqrt", "[", "i", "]"}], ",", "0"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "n"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"j", ",", "n"}], "}"}]}], "]"}]}], ";"}], "  ", 
+  RowBox[{"(*", 
+   RowBox[{"Annihilation", " ", "operator", " ", "in", " ", "energy", " ", 
+    RowBox[{"(", "E", ")"}], " ", "basis"}], "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"X1", "=", 
+    RowBox[{
+     RowBox[{"Sqrt", "[", "0.5", "]"}], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"A1", "\[ConjugateTranspose]"}], "+", "A1"}], ")"}]}]}], ";"}],
+   " ", 
+  RowBox[{"(*", 
+   RowBox[{"Position", " ", "operator", " ", "in", " ", "E", " ", "basis"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"H1A", "[", 
+     RowBox[{"A_", ",", "X_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"A", "\[ConjugateTranspose]"}], ".", "A"}], "+", " ", 
+     FractionBox[
+      RowBox[{"IdentityMatrix", "[", "n", "]"}], "2"], "-", 
+     RowBox[{"g", " ", 
+      RowBox[{"MatrixPower", "[", 
+       RowBox[{"X", ",", "3"}], "]"}]}]}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Cubic", " ", "anharmonic", " ", "Hamiltonian", " ", "in", " ", "E", " ", 
+    "basis"}], "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"H", "=", 
+    RowBox[{"H1A", "[", 
+     RowBox[{"A1", ",", "X1"}], "]"}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{"Make", " ", "Hamiltonian", " ", "to", " ", "export"}], 
+   "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"hamName", "=", "\"\<HO\>\""}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{"Set", " ", "Hamiltonian", " ", "name", " ", "for", " ", "file"}], 
+   "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{"\"\<ham_\>\"", "<>", "hamName", "<>", "\"\<.txt\>\""}], ",", 
+     "H", ",", "\"\<Table\>\""}], "]"}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Export", " ", "Hamiltonian", " ", "to", " ", "file", " ", "which", " ", 
+    "would", " ", "be", " ", "read", " ", "by", " ", "our", " ", "QISKIT", 
+    " ", 
+    RowBox[{"program", "!"}]}], "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.895885615607321*^9, 3.8958856156149817`*^9}, {
+  3.8958858796204033`*^9, 3.895885984539701*^9}, {3.895886033980543*^9, 
+  3.8958860389331923`*^9}, {3.8958860998993483`*^9, 3.89588612717629*^9}, {
+  3.895886163861467*^9, 3.895886182383832*^9}, {3.895886252436356*^9, 
+  3.8958862912467117`*^9}, {3.895886322074785*^9, 3.895886334066401*^9}, {
+  3.895943215006752*^9, 3.895943216551508*^9}, {3.896217064654263*^9, 
+  3.8962171087779417`*^9}},ExpressionUUID->"fd9ec374-5f1f-4026-a022-\
+5f67bc9a8e10"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"CT", " ", "=", " ", "KroneckerProduct"}], ";"}], " ", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ConjugateTranspose", "[", 
+     RowBox[{"CT", "[", 
+      RowBox[{
+       RowBox[{"CT", "[", 
+        RowBox[{
+         RowBox[{"PauliMatrix", "[", "1", "]"}], ",", " ", 
+         RowBox[{"PauliMatrix", "[", "3", "]"}]}], "]"}], ",", " ", 
+       RowBox[{"PauliMatrix", "[", "1", "]"}]}], "]"}], "]"}], "==", " ", 
+    RowBox[{"CT", "[", 
+     RowBox[{
+      RowBox[{"CT", "[", 
+       RowBox[{
+        RowBox[{"PauliMatrix", "[", "1", "]"}], ",", " ", 
+        RowBox[{"PauliMatrix", "[", "3", "]"}]}], "]"}], ",", " ", 
+      RowBox[{"PauliMatrix", "[", "1", "]"}]}], "]"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.8960423589196873`*^9, 3.896042448612822*^9}},
+ CellLabel->
+  "In[127]:=",ExpressionUUID->"85dcc693-826e-45d7-8333-f2daa0187df0"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{3.896042449016317*^9, 3.89604275969766*^9},
+ CellLabel->
+  "Out[128]=",ExpressionUUID->"fab6ee3e-af80-4c17-a6a8-cbfd9e3ee55a"]
+}, Open  ]]
+},
+WindowSize->{1444, 771},
+WindowMargins->{{Automatic, -158}, {Automatic, 0}},
+FrontEndVersion->"13.1 for Mac OS X ARM (64-bit) (June 16, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"f0f29ee6-c371-458b-a094-2cb734420253"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 3287, 94, 261, "Input",ExpressionUUID->"fd9ec374-5f1f-4026-a022-5f67bc9a8e10"],
+Cell[CellGroupData[{
+Cell[3870, 118, 933, 24, 73, "Input",ExpressionUUID->"85dcc693-826e-45d7-8333-f2daa0187df0"],
+Cell[4806, 144, 177, 3, 34, "Output",ExpressionUUID->"fab6ee3e-af80-4c17-a6a8-cbfd9e3ee55a"]
+}, Open  ]]
+}
+]
+*)
+
